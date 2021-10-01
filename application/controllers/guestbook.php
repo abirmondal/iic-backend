@@ -14,8 +14,7 @@ class Guestbook extends CI_Controller
 	{
 		ob_start();
 		ob_end_clean();
-		print_r($_POST);
-		die();
+		// print_r($_POST);
 		$this->form_validation->set_rules('name', 'Name', 'required|trim|callback_nullword');
 		$this->form_validation->set_rules('message', 'Message', 'required|trim|callback_nullword');
 		$this->form_validation->set_message('required', 'This field is required.');
@@ -24,13 +23,13 @@ class Guestbook extends CI_Controller
 			$x = json_encode($this->form_validation->error_array());
 			echo($x);
 		} else {
-			// $id = $this->idcreate();
-			// $query = "INSERT INTO welcome_text (id, name, message, date) VALUES ('".$id."', '".$_POST['name']."', '".$_POST['message']."', '".date('Y-m-d H:m:s', strtotime('now'))."')";
-			// if ($this->db->query($query)) {
-			// 	echo "1";
-			// } else {
-			// 	echo "Sorry! Message couldn't be posted. Please try again later.";
-			// }
+			$id = $this->idcreate();
+			$query = "INSERT INTO welcome_text (id, name, message, date) VALUES ('".$id."', '".$_POST['name']."', '".$_POST['message']."', '".date('Y-m-d H:m:s', strtotime('now'))."')";
+			if ($this->db->query($query)) {
+				echo "1";
+			} else {
+				echo "Sorry! Message couldn't be posted. Please try again later.";
+			}
 		}
 		
 	}
